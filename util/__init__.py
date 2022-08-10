@@ -4,5 +4,11 @@ from .util_0_introduction import get_preprocessed_dataset
 # 1 Label Classification
 from .util_1_label_classification import get_cls_train_test
 
+# 1a Vectorizer
+from .util_1a_vectorizer import show_most_informative_features, stem_analyzer
+
 # 1c Metrics
-from .util_1c_metrics import print_evalution
+from .util_1c_metrics import print_evaluation, fit_predict_evaluate
+
+# 1d Extra features
+from .util_1d_extra_features import FunctionTransformer
