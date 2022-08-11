@@ -2,7 +2,7 @@
 from .util_0_introduction import get_preprocessed_dataset
 
 # 1 Label Classification
-from .util_1_label_classification import get_cls_train_test
+from .util_1_label_classification import get_cls_train_test, get_label_columns
 
 # 1a Vectorizer
 from .util_1a_vectorizer import show_most_informative_features, stem_analyzer
@@ -12,3 +12,6 @@ from .util_1c_metrics import print_evaluation, fit_predict_evaluate
 
 # 1d Extra features
 from .util_1d_extra_features import FunctionTransformer
+
+# 2 Winner prediction (manual labels)
+from .util_2_winner_prediction_manual_labels import get_wpm_train_test, get_manually_labeled_features

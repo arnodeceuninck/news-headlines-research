@@ -5,6 +5,10 @@ import pandas as pd
 import openpyxl  # Dependency of pandas that's not automatically installed
 
 
+def get_useless_columns():
+    return ["Wat zit erin voor mij?", "Modaliteit", "Sensatie"]
+
+
 def get_preprocessed_dataset():
     # Dataset
     df = pd.read_excel('headline-data/Dataverwerking.xlsx', sheet_name='Verwerking')
@@ -16,5 +20,7 @@ def get_preprocessed_dataset():
     for i in range(1, len(df)):
         if pd.isna(df.loc[i, 'Test']):
             df.loc[i, 'Test'] = df.loc[i - 1, 'Test']
+
+    df = df.drop(columns=get_useless_columns())
 
     return df

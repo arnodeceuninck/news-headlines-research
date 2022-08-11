@@ -5,10 +5,14 @@ from .util_0_introduction import get_preprocessed_dataset
 from sklearn import model_selection
 
 
+def get_label_columns():
+    return ["Actief", "Lang", "Vragen", "Interpunctie", "Tweeledigheid", "Emotie", "Voorwaartse Verwijzing",
+            "Signaalwoorden", "Lidwoorden", "Adjectieven", "Eigennamen", "Betrekking", "Voor+Achternaam", "Cijfers",
+            "Quotes"]
+
+
 def get_all_y_columns(df):
-    return df[['Actief', 'Lang', 'Vragen', 'Interpunctie', 'Tweeledigheid', 'Emotie', 'Voorwaartse Verwijzing',
-               'Signaalwoorden', 'Lidwoorden', 'Adjectieven', 'Eigennamen', 'Betrekking', 'Voor+Achternaam',
-               'Cijfers', 'Quotes']]
+    return df[get_label_columns()]
 
 
 def get_cls_train_test(column_name=None):
