@@ -14,4 +14,6 @@ from .util_1c_metrics import print_evaluation, fit_predict_evaluate
 from .util_1d_extra_features import FunctionTransformer
 
 # 2 Winner prediction (manual labels)
-from .util_2_winner_prediction_manual_labels import get_wpm_train_test, get_manually_labeled_features
+# Note: some of those functions are based on code written in 2a Naive Bayes (but were applicable for more models)
+from .util_2_winner_prediction_manual_labels import get_wpm_train_test, get_manually_labeled_features, drop_labels, \
+    print_wp_evaluation, fit_predict_print_wp

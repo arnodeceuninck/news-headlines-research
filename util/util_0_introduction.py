@@ -18,7 +18,7 @@ def get_preprocessed_dataset():
 
     # Test ID's
     for i in range(1, len(df)):
-        if pd.isna(df.loc[i, 'Test']):
+        if pd.isna(df.loc[i, 'Test']) or str(df.loc[i, 'Test']).strip() == '':  # Strip required for e.g. test 49.D
             df.loc[i, 'Test'] = df.loc[i - 1, 'Test']
 
     df = df.drop(columns=get_useless_columns())
