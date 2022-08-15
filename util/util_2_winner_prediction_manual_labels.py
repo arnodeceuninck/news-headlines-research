@@ -21,7 +21,7 @@ def get_x_y_from_ids(df, ids, full_y=False):
     return x, y
 
 
-def get_wpm_train_test(full_y_train=True, full_y_test=False):
+def get_wpm_train_test(x_train_features_only=True, full_y_train=True, full_y_test=False):
     df = get_preprocessed_dataset()
 
     tests_ids = df.Test.unique()
@@ -30,6 +30,9 @@ def get_wpm_train_test(full_y_train=True, full_y_test=False):
 
     train_x, train_y = get_x_y_from_ids(df, train_ids, full_y=full_y_train)
     test_x, test_y = get_x_y_from_ids(df, test_ids, full_y=full_y_test)
+
+    if x_train_features_only:
+        train_x = get_manually_labeled_features(train_x)
 
     return train_x, train_y, test_x, test_y
 
