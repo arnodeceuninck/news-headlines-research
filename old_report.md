@@ -24,3 +24,9 @@ Good results by simply checking the presence of a question mark
 Moderate results by just checking the different interpunction characters. 
 ### Tweeledigheid
 Good results by just checking for a ":" or "." that split the sentence in two parts. 
+
+
+# Manual labeling
+Gekeken naar Cross-Encoders/Bi-Encoders (in sentence-transformers library), maar deze waren vooral om gerelateerde zinnen met elkaar te gebruiken (bv. om een tegenspraak tussen 2 zinnen te vinden, ipv een winner te selecteren)
+Gekeken naar content-based recommendation manieren, maar ook hier het probleem dat dit soort recommendation helemaal anders werkt (we willen niet van heel de itemset relevante items recommenden, maar steeds van de candidate headlines telkens eentje aanraden)
+

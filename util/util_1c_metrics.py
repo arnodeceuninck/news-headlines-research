@@ -17,6 +17,6 @@ def print_evaluation(target, predicted):
 
 
 def fit_predict_evaluate(model, train_x, train_y, test_x, test_y):
-    model.fit(train_x, train_y)
+    model.fit(train_x, train_y, )
     predictions = model.predict(test_x)
     print_evaluation(test_y, predictions)
