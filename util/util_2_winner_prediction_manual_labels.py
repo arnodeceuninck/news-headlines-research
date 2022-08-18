@@ -25,7 +25,7 @@ def merge_x_y(x, y):
     return x.merge(y, on=['Test', 'Headline ID'], how='inner')
 
 
-def get_wpm_train_test(x_train_features_only=True, full_y_train=True, full_y_test=False, df=None):
+def get_wpm_train_test(x_train_features_only=True, full_y_train=True, full_y_test=False, df=None, include_groups=False):
     if df is None:
         df = get_preprocessed_dataset()
 
@@ -36,10 +36,15 @@ def get_wpm_train_test(x_train_features_only=True, full_y_train=True, full_y_tes
     train_x, train_y = get_x_y_from_ids(df, train_ids, full_y=full_y_train)
     test_x, test_y = get_x_y_from_ids(df, test_ids, full_y=full_y_test)
 
+    groups = train_x['Test'] if include_groups else None
+
     if x_train_features_only:
         train_x = get_manually_labeled_features(train_x)
 
-    return train_x, train_y, test_x, test_y
+    if include_groups:
+        return train_x, train_y, test_x, test_y, groups
+    else:
+        return train_x, train_y, test_x, test_y
 
 
 def get_manually_labeled_features(df):
@@ -98,9 +103,12 @@ def predict_wp(model, test_x, proba=True):
     return predicted_winners
 
 
-def fit_predict_print_wp(model, train_x, train_y, test_x, test_y, proba=True, return_acc=False):
+def fit_predict_print_wp(model, train_x, train_y, test_x, test_y, proba=True, return_acc=False, groups=None):
     # Fit
-    model.fit(get_manually_labeled_features(train_x), train_y['Winner'], )
+    if groups is None:
+        model.fit(get_manually_labeled_features(train_x), train_y['Winner'])
+    else:
+        model.fit(get_manually_labeled_features(train_x), train_y['Winner'], groups)
 
     # Predict
     predicted_winners = predict_wp(model, test_x, proba)
