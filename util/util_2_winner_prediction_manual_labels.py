@@ -8,13 +8,17 @@ from .util_1_label_classification import get_label_columns
 from sklearn import model_selection
 
 
+def get_winners_only(df):
+    return df[df["Winner"] == True]
+
+
 def get_x_y_from_ids(df, ids, full_y=False):
     filtered_df = df[df["Test"].isin(ids)]
 
     x = filtered_df.drop(columns=["Winner"])
 
     if not full_y:
-        y = filtered_df[filtered_df["Winner"] == True][["Test", "Headline ID"]]
+        y = get_winners_only(filtered_df)
     else:
         y = filtered_df[["Test", "Headline ID", "Winner"]]
 
