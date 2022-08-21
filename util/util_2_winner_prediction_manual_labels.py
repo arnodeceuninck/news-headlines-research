@@ -90,11 +90,13 @@ def print_wp_evaluation(target, predicted, return_acc=False):
     return accuracy if return_acc else None
 
 
-def predict_wp(model, test_x, proba=True):
+def predict_wp(model, test_x, proba=True, features=None):
+    if features is None:
+        features = get_label_columns()
     if proba:
-        predicted_probs = model.predict_proba(get_manually_labeled_features(test_x))
+        predicted_probs = model.predict_proba(test_x[features])
     else:
-        predicted_probs = model.predict(get_manually_labeled_features(test_x))
+        predicted_probs = model.predict(test_x[features])
 
     class_names = list(range(len(model.classes_))) if proba else 1  # if no prediction per class, only winner
 
