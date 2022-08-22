@@ -20,4 +20,10 @@ from .util_2_winner_prediction_manual_labels import get_wpm_train_test, get_manu
 
 from .util_2a_naive_bayes import get_naive_bayes_model_wp
 
-from .util_2e_gradient_boosting_classifier import get_xgboost_model_wp
+from .util_2e_gradient_boosting_classifier import get_xgboost_model_wp, get_xgboost_importance
+
+from .util_3_extra_features import add_length_to_dataframe, fit_predict_evaluate_extra_features
+
+from .util_3a_sentence_embeddings import add_headline_embedding_to_dataframe
+
+from .util_3b_word_differences import add_diff_length
