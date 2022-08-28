@@ -1,6 +1,8 @@
 # Note: some of those functions are based on code written in 2a Naive Bayes (but were applicable for more models)
 from sklearn import metrics
 import pandas as pd
+import numpy as np
+from sklearn.base import BaseEstimator, ClassifierMixin
 
 from .util_0_introduction import get_preprocessed_dataset
 from .util_1_label_classification import get_label_columns
@@ -100,7 +102,8 @@ def predict_wp(model, test_x, proba=True, features=None, multiple_class_names=No
     else:
         predicted_probs = model.predict(test_x[features])
 
-    class_names = list(range(len(model.classes_))) if multiple_class_names else 1  # if no prediction per class, only winner
+    class_names = list(
+        range(len(model.classes_))) if multiple_class_names else 1  # if no prediction per class, only winner
 
     test_x_predictions = test_x.reset_index(drop=True, inplace=False)
     test_x_predictions[class_names] = pd.DataFrame(predicted_probs)
@@ -111,7 +114,8 @@ def predict_wp(model, test_x, proba=True, features=None, multiple_class_names=No
     return predicted_winners
 
 
-def fit_predict_print_wp(model, train_x, train_y, test_x, test_y, proba=True, return_acc=False, groups=None, multiple_class_names=None):
+def fit_predict_print_wp(model, train_x, train_y, test_x, test_y, proba=True, return_acc=False, groups=None,
+                         multiple_class_names=None, silent=False):
     # Fit
     if groups is None:
         model.fit(get_manually_labeled_features(train_x), train_y['Winner'])
@@ -122,6 +126,27 @@ def fit_predict_print_wp(model, train_x, train_y, test_x, test_y, proba=True, re
     predicted_winners = predict_wp(model, test_x, proba, multiple_class_names=multiple_class_names)
 
     # Evaluate
-    acc_or_none = print_wp_evaluation(test_y, predicted_winners, return_acc)
+    if not silent:
+        acc_or_none = print_wp_evaluation(test_y, predicted_winners, return_acc)
+    else:
+        acc_or_none = evaluate_wp(test_y, predicted_winners)
 
     return acc_or_none
+
+
+class RandomPredictor(BaseEstimator, ClassifierMixin):
+    def __init__(self):
+        self.classes_ = [0, 1]
+
+    def fit(self, X, y):
+        return self
+
+    def predict(self, X):
+        return np.random.randint(2, size=len(X))
+
+    def predict_proba(self, X):
+        return np.random.rand(len(X), 2)
+
+
+def get_random_predictor_model():
+    return RandomPredictor()

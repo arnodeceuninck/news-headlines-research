@@ -16,7 +16,8 @@ from .util_1d_extra_features import FunctionTransformer
 # 2 Winner prediction (manual labels)
 # Note: some of those functions are based on code written in 2a Naive Bayes (but were applicable for more models)
 from .util_2_winner_prediction_manual_labels import get_wpm_train_test, get_manually_labeled_features, drop_labels, \
-    print_wp_evaluation, fit_predict_print_wp, predict_wp, evaluate_wp, merge_x_y, get_winners_only
+    print_wp_evaluation, fit_predict_print_wp, predict_wp, evaluate_wp, merge_x_y, get_winners_only, \
+    get_random_predictor_model
 
 from .util_2a_naive_bayes import get_naive_bayes_model_wp
 
@@ -24,6 +25,6 @@ from .util_2e_gradient_boosting_classifier import get_xgboost_model_wp, get_xgbo
 
 from .util_3_extra_features import add_length_to_dataframe, fit_predict_evaluate_extra_features
 
-from .util_3a_sentence_embeddings import add_headline_embedding_to_dataframe
+from .util_3a_sentence_embeddings import add_headline_embedding_to_dataframe, get_embed_column_names
 
 from .util_3b_word_differences import add_diff_length
