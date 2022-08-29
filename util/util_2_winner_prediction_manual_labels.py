@@ -115,15 +115,19 @@ def predict_wp(model, test_x, proba=True, features=None, multiple_class_names=No
 
 
 def fit_predict_print_wp(model, train_x, train_y, test_x, test_y, proba=True, return_acc=False, groups=None,
-                         multiple_class_names=None, silent=False):
+                         multiple_class_names=None, silent=False, features=None):
+
+    if features is None:
+        features = get_label_columns()
+
     # Fit
     if groups is None:
-        model.fit(get_manually_labeled_features(train_x), train_y['Winner'])
+        model.fit(train_x[features], train_y['Winner'])
     else:
-        model.fit(get_manually_labeled_features(train_x), train_y['Winner'], groups)
+        model.fit(train_x[features], train_y['Winner'], groups)
 
     # Predict
-    predicted_winners = predict_wp(model, test_x, proba, multiple_class_names=multiple_class_names)
+    predicted_winners = predict_wp(model, test_x, proba, multiple_class_names=multiple_class_names, features=features)
 
     # Evaluate
     if not silent:

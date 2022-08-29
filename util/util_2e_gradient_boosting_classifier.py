@@ -12,7 +12,7 @@ def get_xgboost_model_wp():
                    'reg_alpha': 41.0,
                    'reg_lambda': 0.46191366472424383}
 
-    return XGBClassifier(n_estimators=500, random_state=42, **best_params)
+    return XGBClassifier(n_estimators=500, **best_params)
 
 
 def get_xgboost_importance(model, max_num_features=10):
