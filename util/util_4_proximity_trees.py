@@ -7,7 +7,7 @@ from tqdm import tqdm
 
 def get_proximity_forest_model_wp():
     best_params = {'max_depth': 4, 'n_trees': 117, 'sample_multiple_splits': 4}
-    return ProximityForestClassifier(**best_params)
+    return ProximityForestClassifier(show_progress=False, **best_params)
 
 
 class ProximityForestClassifier:

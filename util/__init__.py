@@ -35,4 +35,4 @@ from .util_3b_word_differences import add_diff_length
 
 from .util_3c_combinations import add_extra_features
 
-from .util_4_proximity_trees import get_proximity_forest_model_wp
+from .util_4_proximity_trees import get_proximity_forest_model_wp, ProximityForestClassifier
